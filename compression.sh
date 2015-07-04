@@ -16,16 +16,14 @@ fi
 
 CPU_temp> log.txt
 
-mkdir -p ${dir}/compr
-
-
 for file in ${files}
 do
+  mkdir -p $(dirname $file)/compr
   old=${file%.*}
   new=${old}-smaller.mp4
   out=$(basename $new)
-  time ffmpeg -y -i "${file}" -r 25 -c:v libx264 -preset slower -crf 23 -pix_fmt yuvj420p -c:a libmp3lame -b:a 128k "${dir}/compr/${out}"
-  touch -r ${file} "${dir}/compr/${out}"
+  time ffmpeg -y -i "${file}" -r 25 -c:v libx264 -preset slower -crf 23 -pix_fmt yuvj420p -c:a libmp3lame -b:a 128k "$(dirname $file)/compr/${out}"
+  touch -r ${file} "$(dirname $file)/compr/${out}"
   CPU_temp>> log.txt
 done
 file="Program finished"
