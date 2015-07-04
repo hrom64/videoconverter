@@ -7,7 +7,7 @@ echo $(date +%Y-%m-%dT%H:%M:%S) "||" "${file}" "||" "CPU temperature: $(sensors 
 
 file="Program started"
 dir=$(find ~/ -name "$1" -type d)
-files=$(find ${dir} -name "*MOV" -type f)
+files=$(find ${dir} -name "$2" -type f)
 
 if [ -f "log.txt" ]
 then
